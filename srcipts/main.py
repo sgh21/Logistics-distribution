@@ -92,13 +92,11 @@ def main(start_point,n_persons, n_points=500,axis_range=(-150,150,-150,150),mode
         sample_points: 分组后的点
         end_time-start_time: 求解时间
     '''
-    if mode == "concorde":
-        # 生成500个点，代表配送的目标点，x坐标在-150-150之间，y坐标在-150-150之间
-        target_points = GenerateData.generate_points(n_points, axis_range[0], axis_range[1],axis_range[2], axis_range[3])
-        # 保存随机数据
-        GenerateData.save_as_npy(target_points, '../data/random_points.npy')
-    else:
-        target_points = np.load('../data/random_points.npy')
+    
+    # 生成500个点，代表配送的目标点，x坐标在-150-150之间，y坐标在-150-150之间
+    target_points = GenerateData.generate_points(n_points, axis_range[0], axis_range[1],axis_range[2], axis_range[3])
+    # 保存随机数据
+    GenerateData.save_as_npy(target_points, '../data/random_points.npy')
     # 对配送区域进行采样分组
     sample_points = k_means.sample_points(target_points, n_persons)
 
@@ -120,6 +118,6 @@ def main(start_point,n_persons, n_points=500,axis_range=(-150,150,-150,150),mode
 if __name__=="__main__":
     start_point = np.array([0, 0])
     n_persons = 5
-    mode = "greedy"
+    mode = "MST"
     solutions,first_target,sample_points,time_cost = main(start_point,n_persons,2000,axis_range=(-1500,1500,-1500,1500),mode=mode)
     visualize_solution(sample_points,solutions, start_point,first_target,mode)
