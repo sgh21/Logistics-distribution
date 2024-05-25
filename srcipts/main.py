@@ -120,6 +120,6 @@ def main(start_point,n_persons, n_points=500,axis_range=(-150,150,-150,150),mode
 if __name__=="__main__":
     start_point = np.array([0, 0])
     n_persons = 5
-    mode = "concorde"
+    mode = "greedy"
     solutions,first_target,sample_points,time_cost = main(start_point,n_persons,2000,axis_range=(-1500,1500,-1500,1500),mode=mode)
     visualize_solution(sample_points,solutions, start_point,first_target,mode)
